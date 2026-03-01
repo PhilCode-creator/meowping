@@ -3,6 +3,8 @@ use crate::output::{color_time, print_statistics, print_with_prefix};
 use std::collections::VecDeque;
 use std::error::Error;
 use std::net::{IpAddr, Ipv4Addr, ToSocketAddrs};
+#[cfg(unix)]
+use std::net::Ipv6Addr;
 use std::time::{Duration, Instant};
 
 pub const DEFAULT_ICMP_PAYLOAD: [u8; 24] = [
