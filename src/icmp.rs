@@ -2,7 +2,7 @@ use crate::colors::Colorize;
 use crate::output::{color_time, print_statistics, print_with_prefix};
 use std::collections::VecDeque;
 use std::error::Error;
-use std::net::{IpAddr, Ipv4Addr, Ipv6Addr, ToSocketAddrs};
+use std::net::{IpAddr, Ipv4Addr, ToSocketAddrs};
 use std::time::{Duration, Instant};
 
 pub const DEFAULT_ICMP_PAYLOAD: [u8; 24] = [
@@ -401,10 +401,10 @@ pub fn ping_host_once(
 ) -> std::io::Result<(usize, Duration)> {
     match ip {
         IpAddr::V4(ipv4) => platform::ping_once_ipv4(ipv4, seq, timeout, ttl, ident, payload),
-        IpAddr::V6(ipv6) => {
+        IpAddr::V6(_ipv6) => {
             #[cfg(unix)]
             {
-                platform::ping_once_ipv6(ipv6, seq, timeout, ttl, ident, payload)
+                platform::ping_once_ipv6(_ipv6, seq, timeout, ttl, ident, payload)
             }
             #[cfg(not(unix))]
             {
