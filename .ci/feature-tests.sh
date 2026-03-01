@@ -36,8 +36,8 @@ fi
 
 MEOWPING="$MEOWPING_PATH"
 OUTPUT2=$($MEOWPING https://1.1.1.1 -c 1 -m -p 443)
-if ! echo "$OUTPUT2" | sed 's/\x1b\[[0-9;]*m//g' | grep -q "AS13335 1.1.1.1, Inc"; then
-    echo "Test failed: Expected output to contain 'AS13335 1.1.1.1, Inc' for https://1.1.1.1"
+if ! echo "$OUTPUT2" | sed 's/\x1b\[[0-9;]*m//g' | grep -q "1.1.1.1 (AS13335"; then
+    echo "Test failed: Expected output to contain '1.1.1.1 (AS13335' for https://1.1.1.1"
     echo "Actual output:"
     echo "$OUTPUT2"
     exit 1
